@@ -1,0 +1,130 @@
+#~/bin/bash
+clear
+make clean
+make
+
+echo "Compute script started."
+echo "" >> resultsAccuracies
+echo "===================== 3b ======================" >> resultsAccuracies
+echo "Megisth akriveia gia 32x32 analoga me to filtro" >> resultsAccuracies
+
+	N=15
+	for i in `seq 1 $N`;
+	do
+		echo "_____________________" >> resultsAccuracies
+		./Convolution2D_2 $i 32 >> resultsAccuracies
+		echo "_____________________" >> resultsAccuracies
+	done
+
+echo "===============================================" >> resultsAccuracies
+echo "" >> resultsAccuracies
+echo "Done 3b"
+
+echo "============== 5(a) code 4 =================" >> resultsAccuracies
+echo "Megisth akriveia analoga me to filtro gia to" >> resultsAccuracies
+echo "kwdika 4" >> resultsAccuracies
+echo "" >> resultsAccuracies
+
+	N=12
+	M=30 #MAX filter_radius
+	imageH=2048
+#	for i in `seq 1 $N`;
+#	do
+		for j in `seq 1 $M`;
+		do
+			let tmp=2*j+1
+			if (( imageH > tmp ))
+			then
+				echo "_____________________________" >> resultsAccuracies
+				./Convolution2D_4 $j $imageH >> resultsAccuracies
+				echo "_____________________________" >> resultsAccuracies
+			fi
+		done
+#		let imageH*=2
+#	done
+
+echo "==============================================" >> resultsAccuracies
+echo "" >> resultsAccuracies
+echo "Done 5a code 4" 
+
+echo "============== 5(a) code 6 =================" >> resultsAccuracies
+echo "Megisth akriveia analoga me to filtro gia to" >> resultsAccuracies
+echo "kwdika 6" >> resultsAccuracies
+echo "" >> resultsAccuracies
+
+	N=12
+	M=50 #MAX filter_radius
+	imageH=2048
+#	for i in `seq 1 $N`;
+#	do
+		for j in `seq 1 $M`;
+		do
+			let tmp=2*j+1
+			if (( imageH > tmp ))
+			then
+				echo "_____________________________" >> resultsAccuracies
+				./Convolution2D_6 $j $imageH >> resultsAccuracies
+				echo "_____________________________" >> resultsAccuracies
+			fi
+		done
+#		let imageH*=2
+#	done
+
+echo "==============================================" >> resultsAccuracies
+echo "" >> resultsAccuracies
+echo "Done 5a code 6" 
+
+echo "============== 5(a) code 8_f =================" >> resultsAccuracies
+echo "Megisth akriveia analoga me to filtro gia to" >> resultsAccuracies
+echo "kwdika 8 with float" >> resultsAccuracies
+echo "" >> resultsAccuracies
+
+	N=12
+	M=30 #MAX filter_radius
+	imageH=2048
+#	for i in `seq 1 $N`;
+#	do
+		for j in `seq 1 $M`;
+		do
+			let tmp=2*j+1
+			if (( imageH > tmp ))
+			then
+				echo "_____________________________" >> resultsAccuracies
+				./Convolution2D_float_8 $j $imageH >> resultsAccuracies
+				echo "_____________________________" >> resultsAccuracies
+			fi
+		done
+#		let imageH*=2
+#	done
+
+echo "==============================================" >> resultsAccuracies
+echo "" >> resultsAccuracies
+echo "Done 5a code 8_f" 
+
+echo "============== 5(a) code 8_d =================" >> resultsAccuracies
+echo "Megisth akriveia analoga me to filtro gia to" >> resultsAccuracies
+echo "kwdika 8 with double" >> resultsAccuracies
+echo "" >> resultsAccuracies
+
+	N=12
+	M=50 #MAX filter_radius
+	imageH=2048
+#	for i in `seq 1 $N`;
+#	do
+		for j in `seq 1 $M`;
+		do
+			let tmp=2*j+1
+			if (( imageH > tmp ))
+			then
+				echo "_____________________________" >> resultsAccuracies
+				./Convolution2D_double_8 $j $imageH >> resultsAccuracies
+				echo "_____________________________" >> resultsAccuracies
+			fi
+		done
+#		let imageH*=2
+#	done
+
+echo "==============================================" >> resultsAccuracies
+
+echo "" >> resultsAccuracies
+echo "Compute script finished."

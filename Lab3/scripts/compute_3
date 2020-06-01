@@ -1,0 +1,125 @@
+#~/bin/bash
+clear
+rm tmpResults
+rm erwthma_3_resultsTimes
+
+echo "================== 2 block=32x32, tile=32x32 ====================" >> erwthma_3_resultsTimes
+
+	nvcc -Xcompiler -O4 -DTILE_WIDTH_X=1 -DTILE_HEIGHT_Y=1 lab3_3.cu -o lab3_3
+
+	N=5
+	imageH=512
+	for i in `seq 1 $N`; #for each IMAGE
+	do
+		echo "__ IMAGE:$imageH x $imageH __" >> erwthma_3_resultsTimes
+		
+			M=12 #means 12 run for 12 times
+			for j in `seq 1 $M`; 
+			do
+				results[$j]="$(./lab3_3 16 $imageH)"
+				all+="${results[$j]}"
+				echo "result $j = ${results[$j]}"
+			done
+
+			echo "$all" > tmpResults
+			./parseResults $M < tmpResults >> erwthma_3_resultsTimes
+			rm tmpResults
+			all=""		
+		echo "_____________________________" >> erwthma_3_resultsTimes
+		let imageH*=2
+	done
+echo "===============================================" >> erwthma_3_resultsTimes
+echo "done 2" >> erwthma_3_resultsTimes
+
+echo "================== 3 block=32x32, tile=64x64 ====================" >> erwthma_3_resultsTimes
+
+	nvcc -Xcompiler -O4 -DTILE_WIDTH_X=2 -DTILE_HEIGHT_Y=2 lab3_3.cu -o lab3_3
+
+
+	N=5
+	imageH=512
+	for i in `seq 1 $N`; #for each IMAGE
+	do
+		echo "__ IMAGE:$imageH x $imageH __" >> erwthma_3_resultsTimes
+		
+			M=12 #means 12 run for 12 times
+			for j in `seq 1 $M`; 
+			do
+				results[$j]="$(./lab3_3 16 $imageH)"
+				all+="${results[$j]}"
+				echo "result $j = ${results[$j]}"
+			done
+
+			echo "$all" > tmpResults
+			./parseResults $M < tmpResults >> erwthma_3_resultsTimes
+			rm tmpResults
+			all=""		
+		echo "_____________________________" >> erwthma_3_resultsTimes
+		let imageH*=2
+	done
+echo "===============================================" >> erwthma_3_resultsTimes
+echo "done 3" >> erwthma_3_resultsTimes
+
+echo "================== 4 block=32x32, tile=128x64 ====================" >> erwthma_3_resultsTimes
+
+	nvcc -Xcompiler -O4 -DTILE_WIDTH_X=4 -DTILE_HEIGHT_Y=2 lab3_3.cu -o lab3_3
+
+
+	N=5
+	imageH=512
+	for i in `seq 1 $N`; #for each IMAGE
+	do
+		echo "__ IMAGE:$imageH x $imageH __" >> erwthma_3_resultsTimes
+		
+			M=12 #means 12 run for 12 times
+			for j in `seq 1 $M`; 
+			do
+				results[$j]="$(./lab3_3 16 $imageH)"
+				all+="${results[$j]}"
+				echo "result $j = ${results[$j]}"
+			done
+
+			echo "$all" > tmpResults
+			./parseResults $M < tmpResults >> erwthma_3_resultsTimes
+			rm tmpResults
+			all=""		
+		echo "_____________________________" >> erwthma_3_resultsTimes
+		let imageH*=2
+	done
+echo "===============================================" >> erwthma_3_resultsTimes
+echo "done 4" >> erwthma_3_resultsTimes
+echo "" >> erwthma_3_resultsTimes
+
+echo "================== 5 block=32x32, tile=64x128 ====================" >> erwthma_3_resultsTimes
+
+	nvcc -Xcompiler -O4 -DTILE_WIDTH_X=2 -DTILE_HEIGHT_Y=4 lab3_3.cu -o lab3_3
+
+	N=5
+	imageH=512
+	for i in `seq 1 $N`; #for each IMAGE
+	do
+		echo "__ IMAGE:$imageH x $imageH __" >> erwthma_3_resultsTimes
+		
+			M=12 #means 12 run for 12 times
+			for j in `seq 1 $M`; 
+			do
+				results[$j]="$(./lab3_3 16 $imageH)"
+				all+="${results[$j]}"
+				echo "result $j = ${results[$j]}"
+			done
+
+			echo "$all" > tmpResults
+			./parseResults $M < tmpResults >> erwthma_3_resultsTimes
+			rm tmpResults
+			all=""		
+		echo "_____________________________" >> erwthma_3_resultsTimes
+		let imageH*=2
+	done
+echo "===============================================" >> erwthma_3_resultsTimes
+echo "done 5" >> erwthma_3_resultsTimes
+echo "" >> erwthma_3_resultsTimes
+	
+rm erwthma_4_comparison
+
+
+echo "Compute script finished."

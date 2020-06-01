@@ -1,0 +1,36 @@
+#~/bin/bash
+clear
+rm tmpResults
+rm erwthma_4_resultsTimes
+
+echo "Compute script Erwthma 2-4 started."
+echo "" >> erwthma_2_resultsTimes
+
+echo "================== 1 block=tile=32x32 ====================" >> erwthma_2_resultsTimes
+
+	N=5
+	imageH=512
+	for i in `seq 1 $N`; #for each IMAGE
+	do
+		echo "__ IMAGE:$imageH x $imageH __" >> erwthma_2_resultsTimes
+		
+			M=12 #means 12 run for 12 times
+			for j in `seq 1 $M`; 
+			do
+				results[$j]="$(./lab3_1 16 $imageH 1)"
+				all+="${results[$j]}"
+				echo "result $j = ${results[$j]}"
+			done
+
+			echo "$all" > tmpResults
+			./parseResults $M < tmpResults >> erwthma_2_resultsTimes
+			rm tmpResults
+			all=""		
+		echo "_____________________________" >> erwthma_2_resultsTimes
+		let imageH*=2
+	done
+	
+
+echo "===============================================" >> erwthma_2_resultsTimes
+echo "done 1" >> erwthma_2_resultsTimes
+echo "" >> erwthma_2_resultsTimes

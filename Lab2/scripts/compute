@@ -1,0 +1,107 @@
+#~/bin/bash
+clear
+make clean
+make
+
+echo "Compute script started."
+echo "" >> results
+echo "===================== 3b ======================" >> results
+echo "Megisth akriveia gia 32x32 analoga me to filtro" >> results
+
+	N=15
+	for i in `seq 1 $N`;
+	do
+		echo "_____________________" >> results
+		./Convolution2D_2 $i 32 >> results
+		echo "_____________________" >> results
+	done
+
+echo "===============================================" >> results
+echo "" >> results
+
+echo "============== 5(b) code 4 ====================" >> results
+echo "xronos analoga me to megethos ths eikonas me" >> results
+echo "filtro 16x16 gia to kwdika 4" >> results
+
+	N=8
+	imageH=64
+	for i in `seq 1 $N`;
+	do
+		echo "__ IMAGE:$imageH x $imageH __" >> results
+		./Convolution2D_4 16 $imageH >> results
+		echo "_____________________________" >> results
+		let imageH*=2
+	done
+
+echo "===============================================" >> results
+echo "" >> results
+
+echo "============== 5(b) code 6 ====================" >> results
+echo "xronos analoga me to megethos ths eikonas me" >> results
+echo "filtro 16x16 gia to kwdika 6" >> results
+
+	N=8
+	imageH=64
+	for i in `seq 1 $N`;
+	do
+		echo "__ IMAGE:$imageH x $imageH __" >> results
+		./Convolution2D_6 16 $imageH >> results
+		echo "_____________________________" >> results
+		let imageH*=2
+	done
+
+echo "===============================================" >> results
+echo "" >> results
+
+echo "============== 5(a) code 4 =================" >> results
+echo "Megisth akriveia analoga me to filtro gia to" >> results
+echo "kwdika 4" >> results
+echo "" >> results
+
+	N=12
+	M=50 #MAX filter_radius
+	imageH=4
+	for i in `seq 1 $N`;
+	do
+		for j in `seq 1 $M`;
+		do
+			let tmp=2*j+1
+			if (( imageH > tmp ))
+			then
+				echo "_____________________________" >> results
+				./Convolution2D_4 $j $imageH >> results
+				echo "_____________________________" >> results
+			fi
+		done
+		let imageH*=2
+	done
+
+echo "==============================================" >> results
+echo "" >> results
+echo "============== 5(a) code 6 =================" >> results
+echo "Megisth akriveia analoga me to filtro gia to" >> results
+echo "kwdika 6" >> results
+echo "" >> results
+
+	N=12
+	M=50 #MAX filter_radius
+	imageH=4
+	for i in `seq 1 $N`;
+	do
+		for j in `seq 1 $M`;
+		do
+			let tmp=2*j+1
+			if (( imageH > tmp ))
+			then
+				echo "_____________________________" >> results
+				./Convolution2D_6 $j $imageH >> results
+				echo "_____________________________" >> results
+			fi
+		done
+		let imageH*=2
+	done
+
+echo "==============================================" >> results
+
+echo "" >> results
+echo "Compute script finished."

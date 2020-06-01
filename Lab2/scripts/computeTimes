@@ -1,0 +1,128 @@
+#~/bin/bash
+clear
+make clean
+make
+rm tmpResults
+rm resultsTimes
+
+
+echo "Compute script started."
+echo "" >> resultsTimes
+
+echo "============== 5(b) code 4 ====================" >> resultsTimes
+echo "xronos analoga me to megethos ths eikonas me" >> resultsTimes
+echo "filtro 16x16 gia to kwdika 4" >> resultsTimes
+
+	N=8
+	imageH=64
+	for i in `seq 1 $N`; #for each IMAGE
+	do
+		echo "__ IMAGE:$imageH x $imageH __" >> resultsTimes
+		
+			M=12 #means 12 run for 12 times
+			for j in `seq 1 $M`; 
+			do
+				results[$j]="$(./Convolution2D_4 16 $imageH)"
+				all+="${results[$j]}"
+				echo "result $j = ${results[$j]}"
+			done
+
+			echo "$all" > tmpResults
+			./parseResults $M < tmpResults >> resultsTimes
+			rm tmpResults
+			all=""		
+		echo "_____________________________" >> resultsTimes
+		let imageH*=2
+	done
+
+echo "===============================================" >> resultsTimes
+echo "" >> resultsTimes
+echo "done code 4"
+echo "============== 5(b) code 6 ====================" >> resultsTimes
+echo "xronos analoga me to megethos ths eikonas me" >> resultsTimes
+echo "filtro 16x16 gia to kwdika 6" >> resultsTimes
+
+	N=8
+	imageH=64
+	for i in `seq 1 $N`; #for each IMAGE
+	do
+		echo "__ IMAGE:$imageH x $imageH __" >> resultsTimes
+		
+			M=12 #means 12 run for 12 times
+			for j in `seq 1 $M`; 
+			do
+				results[$j]="$(./Convolution2D_6 16 $imageH)"
+				all+="${results[$j]}"
+				echo "result $j = ${results[$j]}"
+			done
+
+			echo "$all" > tmpResults
+			./parseResults $M < tmpResults >> resultsTimes
+			rm tmpResults
+			all=""		
+		echo "_____________________________" >> resultsTimes
+		let imageH*=2
+	done
+
+echo "===============================================" >> resultsTimes
+echo "done code 6"
+echo "" >> resultsTimes
+echo "============== 5(b) code 8_f ====================" >> resultsTimes
+echo "xronos analoga me to megethos ths eikonas me" >> resultsTimes
+echo "filtro 16x16 gia to kwdika 8_float" >> resultsTimes
+
+	N=8
+	imageH=64
+	for i in `seq 1 $N`; #for each IMAGE
+	do
+		echo "__ IMAGE:$imageH x $imageH __" >> resultsTimes
+		
+			M=12 #means 12 run for 12 times
+			for j in `seq 1 $M`; 
+			do
+				results[$j]="$(./Convolution2D_float_8 16 $imageH)"
+				all+="${results[$j]}"
+				echo "result $j = ${results[$j]}"
+			done
+
+			echo "$all" > tmpResults
+			./parseResults $M 1 < tmpResults >> resultsTimes
+			rm tmpResults
+			all=""		
+		echo "_____________________________" >> resultsTimes
+		let imageH*=2
+	done
+
+echo "===============================================" >> resultsTimes
+echo "" >> resultsTimes
+echo "done code 8_f"
+echo "============== 5(b) code 8_d ====================" >> resultsTimes
+echo "xronos analoga me to megethos ths eikonas me" >> resultsTimes
+echo "filtro 16x16 gia to kwdika 8_double" >> resultsTimes
+
+	N=8
+	imageH=64
+	for i in `seq 1 $N`; #for each IMAGE
+	do
+		echo "__ IMAGE:$imageH x $imageH __" >> resultsTimes
+		
+			M=12 #means 12 run for 12 times
+			for j in `seq 1 $M`; 
+			do
+				results[$j]="$(./Convolution2D_double_8 16 $imageH)"
+				all+="${results[$j]}"
+				echo "result $j = ${results[$j]}"
+			done
+
+			echo "$all" > tmpResults
+			./parseResults $M 1 < tmpResults >> resultsTimes
+			rm tmpResults
+			all=""		
+		echo "_____________________________" >> resultsTimes
+		let imageH*=2
+	done
+
+echo "===============================================" >> resultsTimes
+
+echo "" >> resultsTimes
+echo "Compute script finished."
